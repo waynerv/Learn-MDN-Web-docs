@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Kafka';
+    src: url('Kafka/fonts/Kafka.eot');
+    src: url('Kafka/fonts/Kafka.eot') format('embedded-opentype'),
+         url('Kafka/fonts/Kafka.woff2') format('woff2'),
+         url('Kafka/fonts/Kafka.woff') format('woff'),
+         url('Kafka/fonts/Kafka.ttf') format('truetype'),
+         url('Kafka/fonts/Kafka.svg#Kafka') format('svg');
+}
+@font-face {
+    font-family: 'Medinah';
+    src: url('Medinah/fonts/Medinah.eot');
+    src: url('Medinah/fonts/Medinah.eot') format('embedded-opentype'),
+         url('Medinah/fonts/Medinah.woff2') format('woff2'),
+         url('Medinah/fonts/Medinah.woff') format('woff'),
+         url('Medinah/fonts/Medinah.ttf') format('truetype'),
+         url('Medinah/fonts/Medinah.svg#Medinah') format('svg');
+}
+
+/* General setup */
+
+html {
+  font-size: 10px;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 3.2rem;
+  font-family: Kafka;
+}
+
+h2 {
+  font-size: 2.4rem;
+  font-family: Medinah;
+}
+
+p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  word-spacing: 0.6rem;
+}

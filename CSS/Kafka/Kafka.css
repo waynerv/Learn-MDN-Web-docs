@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Kafka';
+    src: url('fonts/Kafka.eot');
+    src: url('fonts/Kafka.eot') format('embedded-opentype'),
+         url('fonts/Kafka.woff2') format('woff2'),
+         url('fonts/Kafka.woff') format('woff'),
+         url('fonts/Kafka.ttf') format('truetype'),
+         url('fonts/Kafka.svg#Kafka') format('svg');
+}

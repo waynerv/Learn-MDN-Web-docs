@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'PlayfairDisplayBlack';
+    src: url('fonts/PlayfairDisplayBlack.eot');
+    src: url('fonts/PlayfairDisplayBlack.eot') format('embedded-opentype'),
+         url('fonts/PlayfairDisplayBlack.woff2') format('woff2'),
+         url('fonts/PlayfairDisplayBlack.woff') format('woff'),
+         url('fonts/PlayfairDisplayBlack.ttf') format('truetype'),
+         url('fonts/PlayfairDisplayBlack.svg#PlayfairDisplayBlack') format('svg');
+}

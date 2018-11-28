@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Medinah';
+    src: url('fonts/Medinah.eot');
+    src: url('fonts/Medinah.eot') format('embedded-opentype'),
+         url('fonts/Medinah.woff2') format('woff2'),
+         url('fonts/Medinah.woff') format('woff'),
+         url('fonts/Medinah.ttf') format('truetype'),
+         url('fonts/Medinah.svg#Medinah') format('svg');
+}

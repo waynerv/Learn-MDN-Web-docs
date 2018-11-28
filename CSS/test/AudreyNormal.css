@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'AudreyNormal';
+    src: url('fonts/AudreyNormal.eot');
+    src: url('fonts/AudreyNormal.eot') format('embedded-opentype'),
+         url('fonts/AudreyNormal.woff2') format('woff2'),
+         url('fonts/AudreyNormal.woff') format('woff'),
+         url('fonts/AudreyNormal.ttf') format('truetype'),
+         url('fonts/AudreyNormal.svg#AudreyNormal') format('svg');
+}

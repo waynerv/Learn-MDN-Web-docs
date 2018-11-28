@@ -1,0 +1,691 @@
+# MDN学习笔记
+## 入门知识
+### HTML基础
+1. 一个属性应该包含：
+    - 在属性与元素名称（或上一个属性，如果有超过一个属性的话）之间的空格符。
+    - 属性的名称，并接上一个等号。
+    - 由**引号**所包围的属性值。
+2. 图像元素是一个空元素，它不需要包含内容来产生效果，它的作用是向其所在的位置嵌入一个图像。
+3. \<head> 元素放置的内容不是展现给用户的，而是包含例如面向搜索引擎的搜索关键字（keywords）、页面描述、CSS样式表和字符编码声明等。
+4. \<image>元素中的alt属性展示可以描述图像的文本，常用于：1.视觉障碍者进行屏幕阅读；2.图像未能正常加载
+5. 无论你用了多少空白(包括空白字符，包括换行),当渲染这些代码的时候，HTML解释器会将连续出现的空白字符减少为一个单独的空格符。
+### CSS基础
+1. CSS规则集：
+```
+p {
+  color: red;
+  width: 500px;
+  border: 1px solid black;
+}
+```
+    - 选择器（Selector）HTML 元素的名称位于规则集开始。它选择了一个或多个需要添加样式的元素（在这个例子中就是 p 元素）。要给不同元素添加样式只需要更改选择器就行了。
+    - 声明（Declaration）一个单独的规则比如 color: red; 这指定了你想要添加样式元素的属性。
+    - 属性（Properties）这是你改变 HTML 元素样式的方法。（在这个例子中 color 就是 <p> 元素的属性。）在 CSS 中，你通过选择合适的属性来改变你的规则。
+    - 属性值（Property value）在属性的右边，冒号后面，我们拥有属性值，用于从指定的属性里的非常多的外观中选择一个值（我们除了 red 之外还有很多属性值可以用于 color ）。
+2. 不同类型的选择器
+
+选择器名称|选择的内容|示例
+--|--|--
+元素选择器（有时也称作标签或类型选择器）	|所有指定类型的 HTML 元素	|p 选择  \<p>
+标识（ID）选择器	|页面中指定标识的元素（在一个 HTML 页面中，每个标识只被允许指定到一个元素）|	#my-id 选择 \<p id="my-id"> 或 \<a id="my-id">
+类别选择器	|页面中指定类别的元素（一个页面中可以出现多个类别实例）	|.my-class 选择 \<p class="my-class"> 和 \<a class="my-class">
+属性选择器	|页面中拥有指定属性的元素	|img[src] 选择 \<img src="myimage.png"> 而不是 \<img>
+伪类选择器	|指定的元素，但是需要在特殊的状态，比如悬停|	a:hover 选择 \<a>, 但是只在鼠标悬停在链接上时
+3.  \<html> 是整个页面的父元素，而且它所有的子元素都会继承相同的 font-size 和 font-family
+4. 在你写 CSS 时你会发现它大部分都是关于盒子——设置它们的尺寸，颜色，位置等等。你的页面里大部分 HTML 元素都可以被看作一个一个层叠的盒子。
+### JavaScript基础
+1. 浏览器会按照代码在文件中的顺序解析 HTML，所以将 JavaScript 代码放在靠近 HTML 页面底部的位置是通常最好的选择。
+2. JavaScript 是对大小写敏感的
+3. JS可以先定义一个变量之后再赋值，也可以定义赋值同时进行。
+4. JS的数据类型：String字符串，Number数值，Boolean布尔值（小写），Array数组（类似列表可索引），Object对象（一切皆对象）
+5. 添加注释：/* string */ 或单行注释 // string
+6. 相等运算符：\=\=\=（3个等号），不相等：!myVariable === 3;或myVariable !== 3;
+7. 计算时如果混合不同的数据类型可能导致奇怪的结果。
+8. 条件句：
+```
+var iceCream = 'chocolate';
+if (iceCream === 'chocolate') {
+  alert('Yay, I love chocolate ice cream!');    
+} else {
+  alert('Awwww, but chocolate is my favorite...');    
+}
+```
+9. 自定义函数
+```
+function multiply(num1, num2) {
+  var result = num1 * num2;
+  return result;
+}
+```
+10. 事件是能够捕捉浏览器操作并且允许你运行代码进行响应的代码结构. eg: object.onclick = function(){}
+## HTML-构建 Web
+### HTML介绍
+#### 入门基础
+1. 块级元素：会出现在新的一行，其后出现的内容也会换行。一个块级元素不会被嵌套进内联元素中，但可以嵌套在其它块级元素中。
+2. 内联元素：不会导致文本换行，通常出现在一堆文字之间，比如强调、超链接
+3. 属性值最好始终添加引号，单引号和双引号都可以，规则和python相同
+4. 将符号显示在html中需要进行转义，但属性值中的符号不需要
+5. 渲染代码时，HTML解释器会将连续出现的空白字符减少为一个单独的空格符。规范：每一个嵌套的元素以两个空格缩进
+6. \<!-- 和 \-->表示注释
+#### head标签中的元数据
+1. 页面加载完成的时候，标签head里的内容不会在页面中显示出来。
+2. meta元素：设定字符集，网页描述，向特定网站提供可用的特定信息
+3. 添加网页图标`<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">`
+4. 分别使用 \<link>元素以及 \<script> 元素在HTML中应用CSS和JavaScript
+5. \<script>放在文档的尾部（在 \</body>标签之前）是一个更好的选择,他不是空元素，可以直接把脚本代码放入元素之中
+6. 通过添加lang属性到HTML开始标签中来实现为站点设定语言
+#### 文字基础
+1. 最佳实践：只对每个页面使用一次\<h1>；标题层次不能混淆；最好每页使用的标题级别不超过三个
+2. 最好的经验法则：使用\<b>,\<i>,\<u> 来传达传统意义上的粗体，斜体或下划线
+#### 超链接
+1. URL可以指向可以在网络上保存的任何内容。
+2. 使用title属性向超链接添加支持信息（仅当鼠标悬停在其上时才会显示），有区别于/<img>元素的alt属性
+3. URL指向相同目录文件、子目录文件、上级目录文件的不同表示方式（../可重复多次使用）
+4. 使用#+id可以连接到指定片段（URL的定位）
+5. 绝对URL总是指向相同的位置，不管它在哪里使用
+6. 一个相对URL将指向不同的位置，这取决于它所在的文件所在的位置
+7. 链接最佳实践：
+    - 不要重复URL作为链接文本的一部分
+    - 当链接到同一网站的其他位置时，尽可能使用相对链接（使用绝对URL，浏览器需要查询DNS）
+    - 链接到非html资源时，留下清晰的指示（文件大小，是否需要flash，视频质量）
+    - 在下载链接时使用下载属性提供一个默认的保存文件名
+8. 点击链接打开发送电子邮件页面：使用\<a>元素和mailto：URL的方案。使用问号（?）来分隔主URL与参数值，以及使用&符来分隔mailto:中的各个参数
+#### 高级文字格式
+1. 描述列表（产生缩进）：
+```html
+<dl>
+  <dt>soliloquy</dt>
+  <dd>In drama, where a character speaks to themselves, representing their inner thoughts or feelings and in the process relaying them to the audience (but not to other characters.)</dd>
+  <dt>monologue</dt>
+  <dd>In drama, where a character speaks their thoughts out loud to share them with the audience and any other characters present.</dd>
+  <dt>aside</dt>
+  <dd>In drama, where a character shares a comment only with the audience for humorous or dramatic effect. This is usually a feeling, thought or piece of additional background information.</dd>
+</dl>
+```
+2. 块引用：\<blockquote>；行内应用：\<q>.添加cite属性以文本形式告知出处
+3. 缩略语：\<abbr title="">\</abbr>
+4. 标记联系方式：\<address>\</address>,可内嵌超链接
+5. 上标和下标：\<sup>\</sup>;\<sub>\</sub>
+6. 展示代码：行内\<code>\<\code>;代码块（保留空格换行）：\<pre>\</pre>
+7. 表示时间：\<time datetime="2018-11-16"></time>
+#### 文档与网页结构
+1. 网页文档的基本构成:![网页文档的基本构成](https://mdn.mozillademos.org/files/12417/sample-website.png)
+2. 视觉效果并不能说明一切，我们需要遵守语义，并使用正确的元素进行语义化工作
+3. 页面结构专用标签：
+
+```
+标题: <header>.
+导航栏: <nav>.
+主要内容: <main>, 具有代表性的内容段落主题可以使用 <article>, <section>, 和 <div> 元素.
+侧栏: <aside>; 经常嵌套在 <main> 中.
+页脚: <footer>.
+```
+4. 布局元素细节：
+
+```
+<main> 展现了页面内容的独特性。只可以在每一个页面上使用一次<main>，直接把它放到<body>中。在理想情况下，不应该把它嵌套进其他的元素中。
+<article> 闭合一块与自身相关的内容，这块内容能够解释它自身而不是页面上其他的内容（例如一篇单独的博客）。
+<section> 近似于<article>，但是它更多的是伴随着由一个单独功能构成的页面（例如一个小型的地图，或者是一组文章的标题和摘要）。它被认为最好的实际应用是用标题作为每一部分（section）的开头；也要注意的是你可以把不同的<article>分到不同的<section>中，或者把不同的<section>分到不同的<article>中，这要取决于内容。
+<aside> 包含的内容并不与主要内容有直接的联系，但是它可以提供额外的不直接有联系的信息（术语表条目，作者简介，相关链接等等）。
+<header> 展现了一系列的介绍性内容。如果它是<body> 的子元素,它就定义了网站的全局页眉。但是如果它是 <article> 或<section> 的子元素，它就定义了这些部分的特定的页眉(不要把这些与titles and headings混淆)。
+<nav> 包含了页面主要的导航功能。二级链接等，不会进入导航功能部分。
+<footer> 包含了页面的页脚部分。
+```
+5. \<div>和\<span>元素。仅当无法找到更好的语义元素时使用，最好使用class属性进行标记。换行是\<div>元素唯一的固有格式表现
+6. \<br>在一个段落中创建一个换行,\<hr>生成水平分割线
+7. 设计简单网站的步骤：
+    - 列出重复使用元素及包含的内容：比如导航菜单、页面页脚
+    - 画出每个页面的主要结构，标记出要填充的内容
+    - 以列表形式构思出需要在页面上展示的内容，并进行分组（即位于同一页面）
+    - 画出网站的草图（地图），描述不同页面之间的指向关系（如何从主页到达其他页）
+#### HTML调试
+1. 浏览器以宽松模式运行，一般的语法错误页面会进行自动修复并显示
+2. 两种调试方式：浏览器内F12开发者工具；W3C的HTML页面验证
+#### 测验
+1. head中必须包括title属性
+2. time标签中的时间表示方式需要增加0
+### 多媒体与嵌入
+#### HTML中的图片
+1. 像\<img>和\<video>这样的元素有时被称之为替换元素，因为这样的元素的内容和尺寸由外部资源（像是一个图片或视频文件）所定义，而不是元素自身。
+2. 最好给图片添加合适的文字描述，搜索引擎可能会将图片的文字描述和查询条件进行匹配
+3. 装饰性图片就不应该放在HTML文件里， CSS background-image才应该用于插入装饰图片
+4. 不应该使用HTML属性来改变图片的大小（宽高），应该使用CSS或者在把图片放到你的网站页面之前，使用图形编辑器使图片的尺寸正确
+5. 图片标题（title）并不必须要包含有意义的信息，也不推荐使用，因为不是所有用户都可以访问到它
+6. HTML5的\<figure> 和\<figcaption> 元素：为图片提供一个语义容器，在标题和图片之间建立清晰的关联。\<figure> 可以是几张图片、一段代码、音视频、方程、表格或别的。
+7. CSS 背景图片只为了装饰，完全没有语义上的意义
+#### 视频和音频内容
+1. \<video> 允许你简单的嵌入一段视频：
+```html
+<video src="rabbit320.webm" controls>
+  <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.webm">link to the video</a> instead.</p> 
+</video>
+```
+2. 后备内容 — 当浏览器不支持\<video>标签的时候，它将会显示出来，它使我们能够对旧的浏览器做一些兼容处理。
+3. 将 src 属性从\<video>标签中移除，转而将它放在几个单独的标签\<source> 当中，浏览器将会检查\<source>标签，并且播放第一个与其自身 codec 相匹配的媒体。
+4. 建议添加\<source>标签的可选type属性，否则浏览器会尝试加载每个source直到找到能正确播放的格式
+5. 其他的视频特性：
+    - width 和 height：控制视频的尺寸，也可以用 CSS 来控制视频尺寸。视频会始终保持它原始的纵横比。如果设置的尺寸和原始长宽比不一致，多余的部分将使用默认的背景颜色填充
+    - autoplay：使音频和视频内容立即自动播放
+    - loop：播放完毕后自动循环播放
+    - muted：播放时默认关闭声音。
+    - poster：设置视频封面，指向了一个图像的URL
+    - preload：被用来缓冲较大的文件，有3个值可选："none" ：不缓冲，"auto" ：页面加载后缓存媒体文件，"metadata" ：仅缓冲文件的元数据
+6. 音频\<audio>标签和video基本相同，但不支持视觉部件
+7. 显示音轨文本：用\<track>标签链接.vtt（WebVTT）文件,需要注明类型和语言。<code>\<track kind="subtitles" src="subtitles_en.vtt" srclang="en"></code>
+#### 对象到iframe，其他嵌入技术
+1. iframe示例：
+```html
+<iframe src="https://developer.mozilla.org/en-US/docs/Glossary"
+        width="100%" height="500" frameborder="0"
+        allowfullscreen sandbox>
+  <p> <a href="https://developer.mozilla.org/en-US/docs/Glossary">
+    Fallback link for browsers that don't support iframes
+  </a> </p>
+</iframe>
+```
+2. 解释
+    - allowfullscreen：允许\<iframe>通过全屏API设置为全屏模式
+    - frameborder：如果设置为1，则会告诉浏览器在此框架和其他框架之间绘制边框，这是默认行为。0删除边框。不推荐这样设置，因为在CSS中可以更好地实现相同的效果。border: none;
+    - src：与\<video>/\<img>一样包含指向要嵌入文档的URL路径
+    - width 和 height：指定iframe的宽度和高度
+    - 备选内容：与\<video>等其他类似元素相同，您可以在\<iframe>\</iframe>标签之间包含备选内容，如果浏览器不支持\<iframe>，将会显示备选内容
+    - sandbox：需要在已经支持其他\<iframe>功能（例如IE 10及更高版本）但稍微更现代的浏览器上才能工作，可以提高安全性设置
+3. iframe存在安全隐患，只有在必要时嵌入；绝对不能使用HTTP嵌入第三方内容，通常\<iframe>都应通过HTTPS提供
+4. 始终使用iframe的sandbox属性，永远不应该同时添加allow-scripts和allow-same-origin到sandbox属性中
+5. 配置CSP指令，可以防止其他网站在其网页中嵌入自己的内容
+6. \<embed>和\<object>元素，插件和这些嵌入方法是一种传统技术，目前已不太推荐使用
+#### 在网页中添加矢量图形
+1. SVG 是用于描述矢量图像的XML语言，它可以很好地适应CSS样式或JavaScript脚本，但创建难度大，不适合展示图像
+2. 添加SVG方法1：通过\<img>嵌入，操作简单；无法使用CSS和JavaScript调用样式或操作图像。使用srcset属性进行跨浏览器兼容
+3. 添加SVG方法2：在HTML中引入SVG代码，可以使用CSS修改样式及交互；多次使用会导致资源密集型维护，不能缓存
+4. 添加SVG方法3：使用\<iframe>嵌入，可能不支持iframe，使用JavaScript操纵SVG较困难
+#### 响应式图片
+1. 定义：使用相同显示效果的图片但包含多个不同的分辨率（分辨率切换），或者使用不同的图片以适应不同的空间分配（艺术方向）
+2. CSS是比HTML更好的响应式设计的工具
+3. 相同分辨率切换不同的屏幕尺寸：
+    - 增加<code>srcset</code>属性：文件名+空格+图像的固有宽度（以像素w为单位），逗号分隔每组
+    - 增加<code>size</code>属性：媒体条件+空格+媒体条件为真时槽的宽度（px），逗号分割，注意媒体条件顺序<code>sizes="(max-width: 320px) 280px,"</code>
+```html
+<img srcset="elva-fairy-320w.jpg 320w,
+             elva-fairy-480w.jpg 480w,
+             elva-fairy-800w.jpg 800w"
+     sizes="(max-width: 320px) 280px,
+            (max-width: 480px) 440px,
+            800px"
+     src="elva-fairy-800w.jpg" alt="Elva dressed as a fairy">
+```
+4. 相同的屏幕尺寸切换不同的分辨率：
+    - srcset和x语法结合：<code>srcset="elva-fairy-640w.jpg 2x"</code>根据设备分辨率加载图像
+```html
+<img srcset="elva-fairy-320w.jpg,
+             elva-fairy-480w.jpg 1.5x,
+             elva-fairy-640w.jpg 2x"
+     src="elva-fairy-640w.jpg" alt="Elva dressed as a fairy">
+```
+5. 艺术方向问题(任何情况下都必须提供一个<img>元素以及它的src和alt属性，否则图片不显示)：
+```html
+<picture>
+  <source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
+  <source media="(min-width: 800px)" srcset="elva-800w.jpg">
+  <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+</picture>
+``` 
+source可以引用size属性，但应该仅仅当在艺术方向场景下使用media属性；当你使用media时，不要在sizes属性中也提供媒体条件
+6. 浏览器加载页面时，预加载图片在加载和解析页面的CSS和JavaScript之前，因此不能依赖两者来动态调整图片，因为会有重复加载
+7. 使用现代图像格式如WebP和JPEG-2000，在type属性中提供MIME类型以跨浏览器兼容：
+```html
+<picture>
+  <source type="image/svg+xml" srcset="pyramid.svg">  # 只能引用type声明的文件类型
+  <source type="image/webp" srcset="pyramid.webp">    # 如果需要可以增加size或media属性
+  <img src="pyramid.png" alt="regular pyramid built from four equilateral triangles">
+</picture>
+```
+### HTML表格
+#### 表格入门
+1. \<colgroup>就在\<table>标签的下方，每一个\<col>都会制定每列的样式，没有采取任何样式仍然需要添加一个空的\<col>元素，
+2. span属性需要一个无单位的数值，表示该样式在表格中从该列起应用的列数
+#### HTML表格高级特性和可访问性
+1. 使用\<caption>为表格增加一个标题，就放在\<table>标签下面
+2. \<thead>,\<tfoot>,和\<tbody>划分表格结构（替换\<tr>\</tr>）,\<tfoot>可以放在\<thead>下面，\<tbody>总是隐式包含在所有列表中
+3. \<scope>属性让表格更加语义化，表示该单元格在表格中的标题类别：分别可以是col, row, colgroup, rowgroup
+4. 也可用id和header属性精确表示单元格之间的联系，但过于复杂
+### HTML表单指南
+#### 创建表单入门
+1. \<form>是容器元素，最佳实践是至少设置action属性和method属性
+    - action 属性定义提交表单时,应该把所收集的数据送给谁(/那个模块)(URL)去处理
+    - method 属性定义发送数据的HTTP方法(“get”或“post”)
+2. 在所有\<label>元素上使用for属性。引用相应的小部件的id，它将标签链接到表单小部件
+3. 在\<input>元素中最重要的属性是type属性，它定义<input>属性的行为方式。
+4. \<input />和<textarea></textarea>设置默认值的方式有区别：前者用value属性，后置直接在开始和结束标记之间放置默认值
+5. <button>元素的type属性接受三个值：submit, reset或者 button
+    - submit：发送表单的数据到<form>元素的action 属性所定义的网页。
+    - reset：将所有表单小部件重新设置为它们的默认值
+    - button：不会发生任何事！用于JavaScript构建定制按钮
+6. 需要在每个表单小部件上使用name属性来收集特定的数据块，服务器上的脚本将接收的数据作为HTTP请求中包含的3个键/值项的列表（request）
+#### 如何构造HTML表单
+1. \<form>元素：严格禁止在一个表单内嵌套另一个表单。嵌套会使表单的行为不可预知
+2. \<fieldset>和\<legend>元素：一组单选按钮应该将它们嵌套在\<fieldset>元素中，也可用来对表单进行分段。\<legend>的文本内容描述fieldset的用途
+3. 正确设置\<label>标签可以在所有浏览器中单击标签来激活相应的小部件
+4. 用\<div>和\<p>元素包装标签和小部件是常见做法，HTML\<li>列表也很常用；除了\<fieldset>元素，使用标题（例如\<h1>、\<h2>）和分段（如\<section>）来构造复杂的表单也很常见（方便CSS设置样式）
+#### 原生表单部件
+1. 通用属性：autofocus自动高亮（默认关闭），disabled禁用（默认关闭），form关联表单（暂无支持），name数据提交名称，value初始值
+##### 文本输入域
+1. 通用规范：可以被标记为readonly（提供初始值但不允许编辑）或disabled，可以设置placeholder文本，可以限制size和length，可以拼写检查
+2. 单行文本域只有一个真正的约束：如果输入带有换行符的文本，浏览器会在发送数据之前删除换行符。
+3. 通过type属性增强单行文本域：email地址域，password域，search域，tel域，url域
+4. \<textarea>元素属性：cols，文本控件的可见宽度，平均字符宽度；rows，控制的可见文本行数；wrap，表示控件是如何包装文本，hard或soft
+##### 下拉内容
+1. 可以使用selected属性在所需的\<option>元素上设置选择框的默认值
+2. \<option>元素也可以嵌套在\<optgroup label="groups">元素中
+3. \<option>元素设置了value属性，提交表单时该属性值会被发送。如忽略value属性，则使用<option>元素的内容
+4. 使用list属性设置自动补全输入框：
+```html
+<input type="text" name="myFruit" id="myFruit" list="mySuggestion">
+<datalist id="mySuggestion">
+  <option>Apple</option>
+</datalist>
+```
+##### 可选中项
+1. 表单提交后所有具有name属性的小部件都会被发送，即使没有任何输入值
+2. 使用\<fieldset>\<legend><ul><li>等元素组织可选项\<label>\<input>
+3. 多个单选按钮的name属性共享相同的值，它们将被认为属于同一组按钮，同一组中只有一个按钮可以同时被选
+##### 按钮
+1. 从技术上讲，使用\<button>元素或\<input>元素定义的按钮几乎没有区别，但<button>元素中标签可以是HTML，可进行样式化
+##### 高级表单部件
+1. 数字部件：<code>\<input type="number" name="age" id="age" min="1" max="10" step="2"></code>
+2. 滑块部件：<code>\<input type="range" name="beans" id="beans" min="0" max="500" step="10"></code>,需要javascript实现实时显示数值
+3. 日期时间选择器：type=datetime-local, month, time, week，均可以用min和max属性约束
+4. 拾色器：<code>\<input type="color" name="color" id="color"></code>
+##### 其他小部件
+1. 文件选择器：<code>\<input type="file" name="file" id="file" accept="image/*" multiple></code>
+2. 隐藏内容：\<input>元素type="hidden",需要设置它的name和value属性
+3. 图像按钮：<code>\<input type="image" alt="Click me!" src="my-img.png" width="80" height="30" /></code>
+4. 进度条：<code>\<progress max="100" value="75">75/100</progress></code>
+5. 仪表条：<code>\<meter min="0" max="100" value="75" low="33" high="66" optimum="50">75</meter></code>(密码强弱提示？)
+#### 发送表单数据
+1. 如果<form>元素没有提供action属性，数据将被发送到当前包含表单页面的URL
+2. GET方法发送的请求主体为空，因此表单数据只能追加到URL中（很不安全）
+3. 将<form>元素的enctype属性值设置为multipart/form-data以上传二进制文件
+4. XSS攻击利用用户对web站点的信任，而CSRF攻击则利用网站为其用户提供的信任
+5. 最重要的安全原则是:永远不要相信你的用户，包括你自己；所有到达服务器的数据都必须经过检查和消毒
+#### 表单数据校验
+1. 项目开发过程中，一般都倾向于使用客户端校验与服务器端校验的组合校验方式以更好的保证数据的正确性与安全性
+2. required属性 — 如果要使输入成为必需的，则可以使用此属性标记元素
+3. 正则表达式： \<textarea> 元素不支持pattern 属性
+4. 限制条目长度：所有文本框 (\<input> 或 \<textarea>) 可以强制使用minlength 和 maxlength 属性，type=number时为min和max属性
+5. 定义错误消息的外观和文本, 必须使用 JavaScript; 不能使用 HTML 和 CSS 来改变
+```html
+var email = document.getElementById("mail");
+
+email.addEventListener("input", function (event) {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I expect an e-mail, darling!");
+  } else {
+    email.setCustomValidity("");
+  }
+});
+```
+6. 后续章节需对JavaScript语言有一定了解
+#### 后续章节需要CSS和JavaScript知识
+## CSS-设计Web
+### CSS介绍
+#### CSS运作原理
+1. CSS规则
+    - 一组 属性 ，属性的值更新了 HTML 的内容的显示方式。比如，我想让元素的宽度是其父元素的50％，或者元素背景变为红色。
+    - 一个 选择器，它选择元素，这（些）元素是你想应用这些最新的属性值于其上的元素。比如，我想将我的CSS规则应用到我HTML文档中的所有段落上。
+2. 处理过程与文档对象模型（DOM）
+    - 浏览器显示文档时，它必须将文档的内容与其样式信息结合
+    - ![浏览器处理文档过程](https://mdn.mozillademos.org/files/11781/rendering.svg)
+3. 将CSS应用到HTML的3种方式：
+    - 外部样式表（推荐）
+    - 内部样式表
+    - 内联样式，使用元素的<code>style</code>属性，仅影响一个元素
+#### CSS语法
+1. CSS的基本层次构成元素：属性（Property）：属性值（Value）
+2. 声明块里的最后一个声明结束的地方，不需要加分号，但是最后加分号是个好习惯
+3. 选择器加上声明块被称为规则集（ruleset），通常简称规则（rule）
+4. CSS语句：规则（集）、@-规则或嵌套语句
+5. 允许在一行设置多个属性的称为简写属性，如 font，background，padding，border，和 margin
+#### CSS选择器
+1. 选择器可以被分为以下类别：
+    - 简单选择器（Simple selectors）：通过元素类型、class 或 id 匹配一个或多个元素。
+    - 属性选择器（Attribute selectors）：通过 属性 / 属性值 匹配一个或多个元素。
+    - 伪类（Pseudo-classes）：匹配处于确定状态的一个或多个元素，比如被鼠标指针悬停的元素，或当前被选中或未选中的复选框，或元素是DOM树中一父节点的第一个子节点。
+    - 伪元素（Pseudo-elements）:匹配处于相关的确定位置的一个或多个元素，例如每个段落的第一个字，或者某个元素之前生成的内容。 
+    - 组合器（Combinators）：这里不仅仅是选择器本身，还有以有效的方式组合两个或更多的选择器用于非常特定的选择的方法。例如，你可以只选择divs的直系子节点的段落，或者直接跟在headings后面的段落。
+    - 多重选择器（Multiple selectors）：这些也不是单独的选择器；这个思路是将以逗号分隔开的多个选择器放在一个CSS规则下面， 以将一组声明应用于由这些选择器选择的所有元素。
+##### 简单选择器
+1. 文档中的多个元素可以具有相同的class类名，而单个元素可以有多个class类名(以空格分开多个类名的形式书写)，类名可以自由自定义
+2. 任何元素都可以使用id属性自定义唯一的ID名称。一个ID名称必须在文件中是唯一的。这是选择单个元素的最有效的方式
+##### 属性选择器
+1. 存在和值（Presence and value）属性选择器：
+    - [attr]：该选择器选择包含 attr 属性的所有元素，不论 attr 的值为何。
+    - [attr=val]：该选择器仅选择 attr 属性被赋值为 val 的所有元素。
+    - [attr~=val]：该选择器仅选择具有 attr 属性的元素，而且要求 val 值是 attr 值包含的被空格分隔的取值列表里中的一个。
+2. data-* 属性被称为数据属性。它们提供了一种在HTML属性中存储自定义数据的方法
+3. 子串值（Substring value）属性选择器Edit：
+    - [attr|=val] : 选择attr属性的值是 val 或值以 val- 开头的元素。
+    - [attr^=val] : 选择attr属性的值以 val 开头（包括 val）的元素。
+    - [attr$=val] : 选择attr属性的值以 val 结尾（包括 val）的元素。
+    - [attr*=val] : 选择attr属性的值中包含子字符串 val 的元素
+##### 伪类和伪元素
+1. 当你希望样式在特定状态下才被呈现到指定的元素时，你可以往元素的**选择器后面**加上对应的伪类
+2. 伪元素前缀是两个冒号 (::) ， 同样是添加到**选择器后面**去选择某个元素的某个部分
+##### 组合器和多个选择器
+1. 组合器
+
+名称|组合器|选择
+--|--|--
+选择器组	|A,B|匹配满足A（和/或）B的任意元素（参见下方 同一规则集上的多个选择器）.
+后代选择器|A B|匹配B元素，满足条件：B是A的后代结点（B是A的子节点，或者A的子节点的子节点）
+子选择器|A > B|匹配B元素，满足条件：B是A的直接子节点
+相邻兄弟选择器|A + B|匹配B元素，满足条件：B是A的下一个兄弟节点（AB有相同的父结点，并且B紧跟在A的后面）
+通用兄弟选择器|A ~ B|	匹配B元素，满足条件：B是A之后的兄弟节点中的任意一个（AB有相同的父节点，B在A之后，但不一定是紧挨着A)
+#### CSS的值和单位
+##### 数值
+1. 像素 (px) 是一种绝对单位（absolute units），em是Web开发中最常用的相对单位，1em与当前元素的字体大小相同：1em = 16px（默认情况）
+2. 相对单位：em，ex，ch，rem，vw，vh。相对单位用于相对于你的字体或视窗大小来调整HTML元素的大小
+3. 如果数值为0可以不加单位
+##### 百分比
+1. 百分比用于构建动态布局（相对于固定宽度布局）
+2. 常用于指定宽度，基于父容器的宽度大小而动态变化
+##### 颜色
+1. 颜色的表示方式：关键词（red）、十六进制值（#ff0000）、RGB（rgb（））、HSL（hsl（）），RGBA和HSLA增加透明度
+2. 不透明度（Opacity），设置所有选定元素以及它们的孩子节点的不透明度（不仅限于背景颜色）
+##### 函数
+1. css中可以使用函数，如rgb(),hsla(),calc()，url()
+#### 层叠和继承
+##### 层叠
+1. 层叠的决定顺序：重要性-专用性-源代码次序
+2. 重要性：<code>!important</code>可以让一条规则总是优先于其他规则，但可能存在多个!important声明
+3. IDs/class 选择器优先于element选择器
+4. 建议千万不要使用!important，除非绝对必须使用它
+5. 专用性：<code>style</code>属性>ID选择器>类、属性、伪类选择器>元素、伪元素选择器
+6. 源代码次序：后面的规则将战胜先前的规则
+7. 所有规则都会被应用，重叠的属性才会计算顺序
+##### 继承
+1. font-family和color属性会被子元素继承，而margin，padding，border 和 background-image等不会被继承
+2. 四种特殊的通用属性值：inherit(继承父元素样式), initial（浏览器默认样式）, unset（不设置值）, revert（自定义值）
+3. 执行继承的前提是层叠优先
+#### 盒子模型
+1. ![框属性示意图](https://mdn.mozillademos.org/files/13647/box-model-standard-small.png)
+2. border的属性组合：top、right、bottom、left与width、style、color
+3. 外边距塌陷：当两个框彼此接触时，它们的间距将取两个相邻外边界的最大值，而非两者的总和（较小的margin有效宽度为0，只留下值较大的margin）
+4. content的可用空间：在margin, border, padding占据了它们的空间后剩下的空间的宽度和高度（默认为100%）
+5. 框的高度总是采用框内容的高度，除非指定一个绝对的高度
+6. overflow属性：控制内容是否溢出：auto（滚动条），hidden（隐藏），visible（显示）
+7. 背景裁剪：background-clip: border-box；padding-box; content-box
+8. 默认情况下只有块级元素(block box)才具有盒子模型的属性
+9. 三种常见框类型：块框（ block box），行内框（ inline box），行内块状框（inline-block box）：不会在段落行中断开
+#### 调试CSS
+1. CSS也是宽容的，如果声明或选择器出错，将直接会被忽略
+### 样式化文字
+#### 基本文本和字体样式
+1. 文本样式=字体样式+文本布局风格
+##### 字体
+1. 颜色：<code>color</code>属性设置选中元素的前景内容的颜色
+2. 字体：<code>font-family</code>属性为浏览器指定字体或字体列表，如果字体不可用会用默认字体代替
+3. 默认字体风格：<code>serif, sans-serif, monospace, cursive,和 fantasy</code>5种风格，具体使用字体取决于浏览器及操作系统
+4. 设置字体栈（有序提供多个可选字体）：字体名称间用逗号分离，不止一个单词的字体用引号包裹，建议最后提供一个风格字体
+5. 元素的<code>font-size</code>属性从父元素继承,浏览器默认设置值为16px（<html>)
+6. 最佳实践：将文档的<html>的基础<code>font-size</code>设置为10px，方便计算em
+7. 字体样式<code>font-style:normal,italic,oblique</code>,字体粗细<code>font-weight:normal,bold</code>,字型转换<code>text-transform:none,uppercase,lowercase,capitalize,full-width</code>,文本装饰<code>text-decoration:none,underline,overline,line-through</code>
+8. 文字阴影：<code>text-shadow: 4px 4px 5px red</code>,参数分别为水平偏移，垂直偏移，模糊半径，阴影颜色
+##### 文本布局
+1. 文本对齐：<code>text-align:left right center justify</code>
+2. 行高：<code>line-height</code>属性设置文本每行之间的高，接受长度单位，也可设置一个无单位值作为乘数（乘以<code>font-size</code>。
+3. 字母间距：<code>letter-spacing</code>;单词间距：<code>word-spacing</code>
+4. <code>font</code>简写方式：<code> font-style, font-variant, font-weight, font-stretch, font-size, line-height, and font-family</code>，只有font-size和font-family必须指定
+#### 样式化列表
+1. <code>list-style-type</code> ：设置用于列表的项目符号的类型，例如无序列表的方形或圆形项目符号，或有序列表的数字，字母或罗马数字。
+2. <code>list-style-position</code> ：设置在每个项目开始之前，项目符号是出现在列表项内，还是出现在其外。
+3. <code>list-style-image</code> ：允许您为项目符号使用自定义图片，而不是简单的方形或圆形。
+4. 以上3条简写方式：<code>list-style: square url(example.png) inside;</code>
+5. 列表技术开始值：<code>\<ol start="4"></code>;倒数计数：<code>\<ol start="4" reversed></code>
+6. 直接设置列表项指定数值：<code>\<li value="6"></code>
+#### 样式化链接
+##### 应用样式
+1. 链接状态，每个状态都有对应的伪类：
+    - Link (没有访问过的): 链接的默认状态，使用:link 伪类来应用样式。
+    - Visited: 已经被访问过了(存在于浏览器的历史纪录), 使用:visited 伪类来应用样式。
+    - Hover: 当用户的鼠标光标刚好停留在这个链接，使用:hover 伪类来应用样式。
+    - Focus: 当链接被选中的时候 (比如通过键盘的 Tab 移动到这个链接的时候，或者使用编程的方法来选中这个链接 HTMLElement.focus()) 可以使用:focus 伪类来应用样式。
+    - Active: 当链接被激活的时候 (比如被点击的时候)，可以使用 :active 伪类来应用样式
+2. border-bottom和text-decoration都可以生成下划线，但前者样式更好一些，因为绘制位置更低，不会穿过字母
+3. 当 border-bottom属性未设置颜色时边框采用和元素文本一样的颜色，text-decoration:none去下划线
+##### 在链接中插入图标
+1. 对应CSS规则为：
+```html
+a[href*="http"] {
+  background: url('https://mdn.mozillademos.org/files/12982/external-link-52.png') no-repeat 100% 0;
+  background-size: 16px 16px;
+  padding-right: 19px;
+}
+```
+##### 样式化链接为按钮
+1.  <code>display</code> 属性为 inline、inline-block
+#### Web字体
+1. 传统字体使用方式的限制：浏览器或所在系统必须支持该字体，使用web字体可以突破此限制
+2. 使用方式：在CSS开始处通过<code>@font-face</code>指定下载字体文件，然后在规则中引用
+```html
+@font-face {
+  font-family: "myFont";
+  src: url("myFont.ttf");
+}
+```
+3. 一个html文件可以调用任意多个文件名不重复的css文件
+##### 测试
+1. 文字样式化顺序：字体-文本-链接-列表-导航栏菜单
+### 样式化区块
+#### 盒模型概要
+1. 设置宽和高的约束,使页面内容可以灵活响应，又限制最大宽度：
+```html
+width: 70%;
+max-width: 1280px;
+min-width: 480px;
+margin: 0 auto;
+```
+2. 将图像和视频限制在容器内部，使之不溢出。父容器宽度缩小到小于图像的宽度时，图像会一起缩小：
+```html
+display: block;
+margin: 0 auto;
+max-width: 100%;
+```
+3. 改变盒子宽度的计算方式：<code>box-sizing: border-box;</code>
+4. 常见的盒子类型（<code>display</code>属性指定：
+    - 块盒(block box)：堆放在其它盒子之上的盒子（不在一行），可以设置高度和宽度。上述盒模型都适用于块盒。
+    - 行内盒（inline box）：与周围的文本和其它行内元素出现在同一行，随文本流换行。宽度和高度设置无效；所有内边距、外边距和边界设置会改变周围文本的位置，但不会影响周围块盒的位置。
+    - 行内块盒（inline-block box）：跟随周围的文本流堆放不换行；可以使用宽度和高度设置大小，具有块完整性—不会跨段落行换行（空间不够会下落到第二行）
+5. 块级元素默认设置为 <code>display: block;</code>，行内元素默认设置为<code>display: inline;</code>
+#### 背景
+1. 默认情况下是指元素内容、内边距和边界下层的区域（不包括margin），但可以通过<code>background-clip</code>改变背景区域
+2. 背景并不在外边距下层——外边距不是元素区域的一部分，而是元素外面的区域
+##### 基本属性
+1. 背景颜色<code>background-color</code>：默认颜色为透明（transparent），尽量设置后备颜色
+2. 背景图像<code>background-image</code>：使用url()函数添加图像文件，默认情况是平铺重复的，支持包括svg的各种格式
+3. 背景重复：<code>no-repeat, repeat-x, repeat-y, repeat.
+4. 背景位置：指定图像的水平和垂直坐标，图像的左上角为原点。如果只指定一个值，将被假定为水平值，垂直值将默认为center，**百分比表示结束位置**
+5. 背景渐变：<code>background-image: linear-gradient(to bottom, yellow, orange 40%, yellow);</code>，百分比表示结束位置
+6. 背景附着：<code>scroll</code>:更对页面滚动；<code>fixed</code>:始终不滚动；<code>local</code>:跟随元素滚动
+7. 背景简写：简写以上属性<code>background: yellow linear-gradient(to bottom, yellow, #dddd00 50%, orange) no-repeat 99% center;</code>
+8. 多重背景：用逗号分隔多个成组的背景声明，第一个出现在顶部，第二个在下面，以此类推
+9. 背景尺寸：<code>background-size: 16px 16px;</code>,可以使用px、em、百分比等单位
+#### 边框
+1. 没有明确设置值时，默认使用文本的颜色，宽度为3px
+2. 边框类型：<code>solid, dashed, dotted</code>
+3. 边框半径：<code>border-radius: 20px;</code>,对应上左、上右、下右、下左四个角，可以使用em、百分比等单位。
+4. 边框图像：
+```html
+  border: 20px solid black;  /* 作为后备属性 */
+  background-clip: padding-box;
+  border-image-source: url(https://mdn.mozillademos.org/files/13060/border-image.png);
+  border-image-slice: 40; /* 4个方向向内裁切偏移量，单位默认为px */
+  border-image-repeat: round; /* 平铺但不会截断 */
+```
+#### 样式化表格
+1. 固定表格布局，使其不因元素内容改变大小（应设定固定百分比宽度）：table-layout属性设置为fixed
+2. 取消单元格之间的间隔：border-collapse属性设置为collapse
+3. 默认情况下，单元格（td)text-align值为left，标题(th)为center
+4. 实现斑马条纹：公式2n-1选择所有奇数的字数(1、3、5等)，2n会选择所有偶数的子数(2、4、6等等)，与关键字odd,even等同
+5. caption-side属性为底部bottom时，标题被放置在表格的底部
+6. 优化建议： 表格布局-列宽行高-边框-元素字体、间距、对齐方式-背景图片-斑马条纹-表头文字
+#### 高级盒模型特性
+1. 盒子阴影：<code>box-shadow: 5px 5px 5px rgba(0,0,0,0.7);</code>.属性值：水平偏移、垂直偏移、模糊半径、基本颜色
+2. 多个盒子阴影：指定多个框阴影声明，用逗号分隔
+3. 内部阴影： box-shadow属性的开始处增加inset关键字
+4. Filters滤镜： 作用于盒（box）内内容（content）的确切形状，而不仅仅将盒子本身作为一个大的块
+5. 混合模式： 讲元素与背景图片颜色混合显示 <code>background-blend-mode: multiply;</code>
+6. <code>-webkit-background-clip: textEdit</code>;<code>-webkit-text-fill-color: transparent;</code>: 将背景图案填充为字体形状(其余背景不显示)
+#### 评估
+1. 内嵌阴影关键字为<code>inset</code>
+### CSS布局
+#### CSS布局基本介绍
+1. 正常布局流：浏览器默认的HTML解析布局方式
+2. 浮动： <code>float: left, right, none, inherit;</code>, 改变元素堆叠方式（上下变成左右），最常用于文字浮动于元素周围
+3. 定位技术(position属性)，精确控制元素位置：
+    - 静态定位(static)默认的属性——“将元素放在文档布局流的默认位置”。
+    - 相对定位(relative)允许我们相对元素在正常的文档流中的位置移动它——包括将两个元素叠放在页面上
+    - 绝对定位(absolute)将元素完全从页面的正常布局流中**移出**，相对某个元素进行固定，例如通过标签显示和隐藏的内容面板
+    - 固定定位(fixed)将一个元素相对浏览器视口固定，而不是相对另外一个元素。 在创建类似页面滚动总是处于页面上方的导航菜单时非常有用。
+    - 粘性固定(sticky)屏幕范围（viewport）内时该元素的位置不受到定位影响，当该元素的位置将要移出偏移范围时，定位又会变成fixed，根据设置的left、top等属性成固定位置的效果
+4. <code>display</code>属性：block、inline、block-inline设置在正常布局流中的显示方式（所有元素通过该属性的默认值定义如何显示）
+#### 正常布局流
+1. 默认情况下，一个块级元素的内容宽度是其父元素的100%，并且与其内容一样高
+2. 内联元素高宽与他们的内容高宽一样。不能对内联元素设置宽度或高度
+#### 弹性盒子
+1. 指定父元素的布局为flexible：<code>display: flex</code>
+2. 弹性盒子默认主轴方向为<code>row</code>,设置方式：<code>flex-direction: column</code>,后加-reverse可反向
+3. 让弹性盒子在有必要时拆行：<code>flex-wrap: wrap;</code>
+4. <coed>flex-flow</code>为<code>flex-direction</code>和<code>flex-wrap</code>的缩写
+5. flex项的动态尺寸：<code>flex: 1;</code>中1为无单位的比例值，表示每个flex项沿主轴的可用空间大小。后加固定单位表示在按比例分配前的预置空间
+6. <code>align-items</code>控制flex项在交叉轴上的位置：stretch(默认值)拉伸填充；center保持原高度但居中，flex-start，flex-end在开始或结束处对齐
+7. <code>justify-content</code>控制flex 项在主轴上的位置,属性值同上（space-around沿主轴均匀分布）
+8. flex项排序：<code>order: 1;</code>,默认值为0，越小越靠前，值相等则按源顺序排序（可以设置负值）
+#### 网格
+1. 参考文章：[learn css grid](https://learncssgrid.com/)
+##### Grid
+2. 创建网格容器：<code>display: grid</code>(或inline-grid),容器内的子元素成为<code>grid itrm</code>,默认按列排布，填充容器宽度
+3. 显式设置固定网格:通过<code>grid-template-columns和grid-template-rows</code>属性创建行和列
+4. <code>grid-template-rows: 50px 100px</code>创建网格row track（轨道），高度值可以为px,%,em等，未定义的轨道高度为内容高度。(columns基本相同，但限定每行列数)
+5. <code>fr</code>单位示例：1fr = ((width of grid) - (3rem) - (25% of width of grid)) / 3
+6. 设置网格track的最小值和最大值示例：<code>grid-template-rows: minmax(100px, auto);grid-template-columns: minmax(auto, 50%) 1fr 3em;</code>
+7. 使用<code>repeat()</code>函数重复设置轨道数值：<code>grid-template-rows:repeat(4, 100px);</code>,参数1为重复次数，参数2为重复数值
+8. 网格间隔Grid Gaps(Gutters)：定义行列之间（不包括容器边缘）的间隔，简写方式<code>grid-gap: 100px 1em</code>(row&column)
+##### Items
+9. 通过网格分界线定位：<code>grid-row:2;grid-column: 3/4;</code>,<code>grid-area: 2 / 2 / 3 / 3</code>代表grid-row-start, grid-column-start, grid-row-end, grid-column-end.
+10. grid items的跨行或跨列分布：<code>grid-row: 2 / 5;grid-column: 2 / 4;</code>（简写start和end)
+11. 通过Grid Areas命名放置items,每个名称定义1列，每组名称定义1行：
+```html
+grid-template-areas:   "header header"
+                        "content sidebar"
+                        "footer footer";
+grid-template-rows:    150px 1fr 100px;
+grid-template-columns: 1fr 200px;
+```
+放置item：<code>grid-row-start:header;grid-row-end:header;grid-column-start:header;grid-column-end:header;</code>（可简写）或<code>grid-area: sidebar;</code>
+12. 放置item：<code>.item-2 {grid-row-start: 1; grid-column-end: span 2;}</code>
+##### Aligning Grid Items
+13. 网格容器对齐属性：<code>justify-items</code>沿行轴对齐；<code>align-items</code>沿列轴对齐。常用值：start,end,center,stretch,auto,normal
+14. items个体对齐属性：<code>justify-self</code>沿行轴对齐；<code>align-self</code>沿列轴对齐。常用值同上
+15. 在css内执行计算：使用<code>calc()</code>函数。
+#### 浮动
+1. 工作方式：脱离正常的文档布局流，并吸附到其父容器的左边或右边。正常布局中位于该浮动元素之下的内容，会围绕着浮动元素填满其右侧的空间
+2. 文字围绕图片：<code>img {float: left;margin-right: 30px;}</code>
+3. 首字下沉：<code>p::first-letter {font-size: 3em;float: left;margin-right: 4px;}</code>
+4. 多列浮动布局：设置元素合理宽度，增加<code>float</code>属性，需要时设置<code>margin</code>间隔
+5. 使用浮动可以使可视化布局与源顺序不同
+6. 需要注意的问题：所有在浮动下面的自身不浮动的内容都将围绕浮动元素进行包装，解决方案：<code>footer {clear: both;}</code>此处起停止浮动
+7. 由于内边距和边界引入的额外宽度，原有的多列布局容易被破坏，解决方案：<code>* {box-sizing: border-box;}</code>更改盒模型
+8. 页脚问题：页脚正压在最长列上，非浮动元素的外边距不能用于它们和浮动元素之间来创建空间，解决方案：页脚之上增加一个空白<div>clearfix清除浮动块
+9. 浮动项目的背景高度，设置固定高度容易出现问题；Flexbox可以自动地延长列，使高度和最长的一列一样。
+#### 定位
+1. 盒模型原理：环绕元素内容添加任何内边距、边界和外边距来布置单个元素盒子
+2. 相对定位：<code>position: relative;</code>，使用<code>top, bottom, left, right</code>属性，相对正常布局位置进行长度移动
+3. 绝对定位：不再存在于正常文档布局流，默认情况下相对<code>\<html></code>元素固定，通过<code>position: relative;</code>指定相对元素
+4. 使用<code>z-index</code>更改堆叠顺序：源顺序中后定位的元素将堆叠在先定位的元素之后，z-index值默认为0，值越大展示优先级越高
+5. 固定定位相对于浏览器视窗本身固定元素，也不再存在于正常文档布局流，注意在下方的元素增加上边距
+6. 粘性定位：元素在跨越特定阈值前为相对定位，之后为固定定位，如<code>#one { position: sticky; top: 10px; }</code>
+#### 定位实例
+1. 消息盒子思路：将消息panel设置为绝对定位（相对于所在父元素）进行覆盖，被选中的元素z-index值设为1，显示在最上面
+2. 固定位置消息盒子思路：将消息盒子设为fixed，主内容设置足够的margin-left值
+3. 滑动隐藏面板思路：label+checkbox（input），点击label则checkbox进入checked状态（可被伪类选择器选中），分别设置选中前后面板位置，设置transition属性实现动画。
+#### 多列布局
+1. 创建多列布局：设置的容器的<code>column-count 或者 column-width</code>.
+    - <code>.container {column-count: 3;}</code>，创建制定数量的列，宽度由浏览器计算平均分配
+    - <code>.container {column-width: 200px;}</code>，浏览器按指定宽度尽可能多的创建列；除非刚好除尽，否则剩余的空间会被现有的列平分（不能用百分比）
+2. Multicol 创建的列无法为某一列单独的设定样式（背景、文本），只能设定以下样式：
+    - 使用<code> column-gap: 200px </code>改变列间间隙(接受任何长度单位)
+    - 用<code> column-rule: 4px dotted blue</code> 在列间加入一条分割线(用法同border)，分割线本身并不占用宽度
+3. 设置<code>break-inside: avoid; 或者 page-break-inside: avoid;</code>防止某一元素在自动分列时从内部被割断
+## JavaScript — 用户端动态脚本
+### JavaScript第一步
+#### 什么是JavaScript
+1. JavaScript是一种脚本语言，可以用来创建动态更新的内容，控制多媒体，制作图像动画
+2. 借助于应用程序接口(API)，JavaScript能实现更强大的功能。API如文档对象模型API、地理位置API、画布API及第三方API
+3. 通过DOM动态修改HTML和CSS来更新UI是JavaScript最普遍的用处。如果JavaScript在HTML和CSS就位之前加载运行，就会引发错误
+4. 每个浏览器标签页的代码运行环境是相对独立的以保障安全性
+5. 添加JavaScript：
+    - 内部添加：在<code>\</body>/<code>标签前插入<code>\<script>\</script></code>元素
+    - 外部引用：创建js文件并使用<code>\<script></code>的<code>src</code>属性进行引用
+    - 内联处理器：不要使用此操作，示例<code>\<button onclick="createParagraph()">点我呀</button></code>
+6. 注释：双斜杠后添加单行注释，在 /* 和 */ 之间添加多行注释
+#### 初次接触JavaScript
+1. 示例-猜数字游戏
+#### 调试代码错误
+1. 错误分类：**语法错误**或**逻辑错误**
+2. 调试工具：浏览器开发者工具
+3. 常见错误：语句缺少分号；参数列表缺少冒号；属性ID缺少冒号；函数体末尾缺少花括号；字符串缺少闭口引号
+#### 变量
+1. 特点：存放的值可以改变，能够存储任何东西
+2. 变量不是数值本身，它们仅仅是一个用于存储数值的容器
+3. 使用变量需要先声明，也可在赋值的同时声明：<code>var myName = 'Chris';</code>
+4. 小写驼峰命名法：小写整个命名的第一个字母然后大写剩下单词的首字符
+5. 避免使用保留字
+6. JavaScript的布尔类型表示是true和false，不大写
+7. Array类似与Python中的列表，可通过下标索引
+8. Object概念类似于Python中的类实例，通过<code>var dog = { name : 'Spot', breed : 'Dalmatian' };</code>定义对象属性
+#### 数字和操作符
+1. JavaScript只有1个数值类型：Number，拥有整数、浮点数、双精度浮点数等十进制数
+2. 算数运算符：<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>,基本规则同Python
+3. 递增和递减运算符：加1或减1
+4. 赋值运算符：基本同Python
+5. 比较运算符：除===和！==外基本同Python
+#### 字符串
+1. 引号使用条件基本同Python
+2. 同样使用反斜杠\转义
+3. 连接字符串：使用<code>+</code>拼接字符串
+4. 字符串和数值拼接时，数值将被自动转换为字符串
+5. 使用<code>.toString()</code>方法将数值转换为字符串
+6. 使用<code>Number()</code>函数将字符串转换为数值（类似int())
+#### 字符串方法
+1. 获取字符串长度：<code>length</code>属性
+2. 通过下标索引子串：<code>browserType[browserType.length-1];</code>
+3. 在字符串中查找子串：<code>browserType.indexOf('zilla');</code>返回索引值或-1（不存在）
+4. 提取字符串子串：<code>browserType.slice(0,3);</code>，如果没有传入第二个参数，结束位置会在原始字符串的末尾
+5. 转换大小写：<code>toLowerCase()和toUpperCase()</code>方法
+6. 替换字符串：<code>browserType = browserType.replace('old','new');</code>
+#### 数组
+1. 创建数组(类似Python列表)：
+```
+var shopping = ['bread', 'milk', 'cheese', 'hummus', 'noodles'];
+shopping;
+```
+2. 访问和修改组项：基本和Python相同
+3. 查找数组长度：<code>sequence.length;</code>,常见的数组遍历循环：
+```
+var sequence = [1, 1, 2, 3, 5, 8, 13];
+for (var i = 0; i < sequence.length; i++) {
+  console.log(sequence[i]);
+}
+```
+4. 分割字符串为数组：<code>ar myArray = myData.split(',');</code>
+5. 联结数组为字符串：<code>var myNewString = myArray.join(',');</code>
+6. 将数组转换为字符串的另一种方法是使用toString()方法:
+```
+var dogNames = ["Rocket","Flash","Bella","Slugger"];
+dogNames.toString(); //Rocket,Flash,Bella,Slugger
+```
+7. 添加和删除数组项：
+    - 在数组末尾添加或删除一个项目，使用<code>push(item)</code>和<code>pop()</code>方法
+    - 在数组开始处添加或删除一个项目，使用<code>unshift(item)</code>和<code>shift()</code>方法
+#### 评估

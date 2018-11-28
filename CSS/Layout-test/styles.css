@@ -1,0 +1,72 @@
+body {
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    font: 1.2em / 1.2 Arial, Helvetica, sans-serif;
+  }
+
+  img {
+      max-width: 100%;
+      display: block;
+      margin-bottom: 1px;
+  }
+
+  .logo {
+    font-size: 200%;
+    padding: 50px 20px;
+    margin: 0 auto;
+    max-width: 980px;
+  }
+
+  .grid {
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 980px;
+  }
+
+  nav {
+    background-color: #000;
+    padding: .5em;
+    position: sticky;
+    top: 0;
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: .5em 1em;
+  }
+
+  .photos {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+    column-count: 2;
+    column-gap: 1px;
+    width: 45%;
+  }
+
+  .feature {
+      width: 200px;
+      float: left;
+      margin-right: 20px;
+  }
+
+  article {
+    float: left;
+    margin-right: 2%;
+    width: 63%;
+  }
+
+  aside {
+    float: left;
+    width: 35%;
+  }

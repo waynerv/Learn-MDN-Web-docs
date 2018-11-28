@@ -1,0 +1,148 @@
+/* General setup */
+@font-face {
+    font-family: 'PlayfairDisplayBlack';
+    src: url('fonts/PlayfairDisplayBlack.eot');
+    src: url('fonts/PlayfairDisplayBlack.eot') format('embedded-opentype'),
+         url('fonts/PlayfairDisplayBlack.woff2') format('woff2'),
+         url('fonts/PlayfairDisplayBlack.woff') format('woff'),
+         url('fonts/PlayfairDisplayBlack.ttf') format('truetype'),
+         url('fonts/PlayfairDisplayBlack.svg#PlayfairDisplayBlack') format('svg');
+}
+
+@font-face {
+    font-family: 'AudreyNormal';
+    src: url('fonts/AudreyNormal.eot');
+    src: url('fonts/AudreyNormal.eot') format('embedded-opentype'),
+         url('fonts/AudreyNormal.woff2') format('woff2'),
+         url('fonts/AudreyNormal.woff') format('woff'),
+         url('fonts/AudreyNormal.ttf') format('truetype'),
+         url('fonts/AudreyNormal.svg#AudreyNormal') format('svg');
+}
+
+
+/* Layout */
+
+section {
+  float: left;
+  width: 50%;
+  font-size: 1em
+}
+
+aside {
+  float: left;
+  width: 30%;
+}
+
+nav {
+  float: left;
+  width: 20%;
+}
+
+footer {
+  clear: both;
+}
+
+header, section, aside, nav, footer {
+  padding: 20px;
+}
+
+/* header and footer */
+
+header, footer {
+  border-top: 5px solid #a66;
+  border-bottom: 5px solid #a66;
+}
+
+/* WRITE YOUR CODE BELOW HERE */
+
+html {
+  font-size: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  min-width: 1000px;
+  max-width: 1400px;
+  font-family: 'AudreyNormal';
+  font-size: 1.5em;
+  line-height: 1;
+  letter-spacing:0.5px;
+  word-spacing: 2px;
+}
+
+header h1 {
+  font-family: 'PlayfairDisplayBlack';
+  font-size: 3em;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+section h2+p {
+  text-indent: 20px;
+}
+
+a {
+
+}
+
+a:link {
+  color: #a66;
+}
+
+a:visited {
+  color: #a66;
+}
+
+a:focus {
+  color: #a66;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  color: #a66;
+  text-decoration: none;
+}
+
+a:active {
+  color: red;
+  background: green;
+}
+
+a[href*='http'] {
+  background: url(external-link-52.png) no-repeat 100% 2px;
+  background-size: 14px 14px;
+  padding-right: 17px;
+}
+
+li {
+  line-height: 1;
+}
+
+ul {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  list-style: square upper-roman;
+}
+
+ol {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  list-style: upper-roman;
+}
+
+nav li {
+  margin-top: 10px;
+  line-height: 3em;
+    border: 2px solid #a66;
+}
+
+nav a {
+  padding-left: 5px;
+  text-decoration: none;
+  font-size: 1.5em;
+}

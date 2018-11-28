@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My CSS experiment</title>
+    <style>
+        /* 基本的table样式 */
+table {
+  font: 1em sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 所有在table里的td以及th，这里的逗号不是一个组合器，
+它只是允许你把几个选择器对应到相同的CSS规则上.*/
+table td, table th {
+  border : 1px solid black;
+  padding: 0.5em 0.5em 0.4em;
+}
+
+/* 所有table里的thead里的所有th */
+table thead th {
+  color: white;
+  background: black;
+}
+
+/* 所有table里的tbody里的所有td（第一个除外），每个td都是由它上边的td选择 */
+table tbody td + td {
+  text-align: center;
+}
+
+/*table里所有的tbody里的td当中的最后一个 */
+table tbody td:last-child {
+  text-align: right
+}
+
+/* 所有table里的tfoot里的th */
+table tfoot th {
+  text-align: right;
+  border-top-width: 5px;
+  border-left: none;
+  border-bottom: none;
+}
+
+/* 在table当中，所有的th之后的td */
+table th + td {
+  text-align: right;
+  border-top-width: 5px;
+  color: white;
+  background: black;
+}
+
+/* 定位在“with-currency”类中拥有属性lang并且这个属性值为en-US的元素中的，最后td(:last-child)节点的前面（::before）*/
+.with-currency[lang="en-US"] td:last-child::before {
+  content: '$';
+}
+
+/* 定位在“with-currency”类中拥有属性lang并且这个属性值为fr的元素中的，最后td(:last-child)节点的后面（::after） */
+.with-currency[lang="fr"] td:last-child::after {
+  content: ' €';
+}
+    </style>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is my first CSS example</p>
+
+    <ul>
+      <li>This is</li>
+      <li>a list</li>
+    </ul>
+    <table lang="en-US" class="with-currency">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Qty.</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th colspan="2" scope="row">Total:</th>
+      <td>148.55</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>Lawnchair</td>
+      <td>1</td>
+      <td>137.00</td>
+    </tr>
+    <tr>
+      <td>Marshmallow rice bar</td>
+      <td>2</td>
+      <td>1.10</td>
+    </tr>
+    <tr>
+      <td>Book</td>
+      <td>1</td>
+      <td>10.45</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
