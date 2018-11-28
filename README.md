@@ -667,13 +667,13 @@ grid-template-columns: 1fr 200px;
 6. 替换字符串：<code>browserType = browserType.replace('old','new');</code>
 #### 数组
 1. 创建数组(类似Python列表)：
-```
+```html
 var shopping = ['bread', 'milk', 'cheese', 'hummus', 'noodles'];
 shopping;
 ```
 2. 访问和修改组项：基本和Python相同
 3. 查找数组长度：<code>sequence.length;</code>,常见的数组遍历循环：
-```
+```html
 var sequence = [1, 1, 2, 3, 5, 8, 13];
 for (var i = 0; i < sequence.length; i++) {
   console.log(sequence[i]);
@@ -682,11 +682,90 @@ for (var i = 0; i < sequence.length; i++) {
 4. 分割字符串为数组：<code>ar myArray = myData.split(',');</code>
 5. 联结数组为字符串：<code>var myNewString = myArray.join(',');</code>
 6. 将数组转换为字符串的另一种方法是使用toString()方法:
-```
+```html
 var dogNames = ["Rocket","Flash","Bella","Slugger"];
 dogNames.toString(); //Rocket,Flash,Bella,Slugger
 ```
 7. 添加和删除数组项：
     - 在数组末尾添加或删除一个项目，使用<code>push(item)</code>和<code>pop()</code>方法
     - 在数组开始处添加或删除一个项目，使用<code>unshift(item)</code>和<code>shift()</code>方法
-#### 评估
+### JavaScript基础要件
+#### 条件语句
+##### if...else语句
+1. 基础语法（不一定需要else和第二个花括号）：
+```html
+if (condition) {
+  code to run if condition is true
+} else {
+  run some other code instead
+}
+```
+2. 分支条件语句：<code>else if</code>等于Python中的<code>elif</code>
+3. 任何不是false, undefined, null, 0, NaN的值或一个空字符串（''）在作为条件语句进行测试时实际返回true
+4. 逻辑运算符（可组合使用）：
+    - <code>&&</code>逻辑与，等于python中的and
+    - <code>||</code>逻辑或，等于python中的or
+    - <code>！</code>逻辑非，等于python中的not
+##### switch语句
+1. 基础语法（default语句非必需，用来处理未知情况）：
+```html
+switch (expression) {
+  case choice1: // 如果选择与表达式匹配，则运行下方代码
+    run this code
+    break;
+    
+  // include as many cases as you like
+  
+  default:
+    actually, just run this code
+}
+```
+##### 三元运算符
+1. 条件语句的简略形式：
+```html
+( condition ) ? if true run this code : or run this code instead
+```
+#### 循环结构
+1. for循环基础语法：
+```html
+for (initializer; exit-condition; final-expression) {
+  // code to run
+}
+```
+2. for循环常见实例：
+```html
+var cats = ['Bill', 'Jeff', 'Pete', 'Biggles', 'Jasmin'];
+var info = 'My cats are called ';
+var para = document.querySelector('p');
+
+for (var i = 0; i < cats.length; i++) {
+  if (i === cats.length - 1) {
+    info += 'and ' + cats[i] + '.';
+  } else {
+    info += cats[i] + ', ';
+  }
+}
+
+para.textContent = info;
+```
+3. 注意无限循环问题
+4. 使用break退出循环
+5. 使用continue跳过后续语句
+6. while循环基础语法：
+```html
+initializer
+while (exit-condition) {
+  // code to run
+
+  final-expression
+}
+```
+7.do...while循环基础语法（先执行一次再检查条件）：
+```html
+initializer
+do {
+  // code to run
+
+  final-expression
+} while (exit-condition)
+```
