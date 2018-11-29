@@ -769,3 +769,45 @@ do {
   final-expression
 } while (exit-condition)
 ```
+#### 函数
+1. 内置函数：大多数调用浏览器后台的函数的代码，是使用像C++这样更低级的系统语言编写的
+2. 内置浏览器函数并不是函数——它们是方法，内置浏览器功能（方法）和变量（称为属性）存储在结构化对象内
+3. 匿名函数通常用于运行负载的代码以响应事件触发（如点击按钮）-使用事件处理程序，常见示例：
+```html
+var myButton = document.querySelector('button');
+
+myButton.onclick = function() {
+  alert('hello');
+}
+```
+4. 数组join（）函数的参数默认为逗号分隔符
+5. 所有函数的最外层被称为全局作用域。 在全局作用域内定义的值可以在任意地方访问。
+6. 函数作用域（同Python）
+#### 自定义函数
+1. onclick后应该接函数名称而不用加括号：<code>btn.onclick = displayMessage;</code>
+2. 如果要在点击事件里面绑定函数，不能直接使用displayMessage('Woo'),要把它放在一个匿名函数里面，不然函数会直接调用
+#### 函数返回值
+1. random()函数接受1个参数-1个整数，返回0到这个整数之间的随机数
+2. isNaN()函数测试num的值是否不是一个数字-如果不是数字，就返回true，否则返回false
+#### 事件
+1. 事件是在编程时系统内发生的动作或者发生的事情，系统会在事件出现的时候触发某种信号并且提供自动加载某种动作（如运行代码）的机制
+2. 事件触发时会运行的代码块即为事件处理器
+3. onclick是被用在这个情景下的事件处理器属性，将一些代码赋值给它时，只要事件触发代码就会运行。
+4. 请勿使用行内事件处理器
+5. addEventListener()和removeEventListener()，参数分别为事件处理器名称和要执行的代码块，可以方便的添加和清除处理器
+6. 使用addEventListener()的优势：可以删除事件处理程序代码；可以向同一类型的元素添加多个不同代码的监听器
+7. 事件对象：事件对象e的target属性始终是事件刚刚发生的元素的引用，可以使用任何名称作为事件对象，使用示例：
+```html
+var divs = document.querySelectorAll('div');
+
+for (var i = 0; i < divs.length; i++) {
+  divs[i].onclick = function(e) {
+    e.target.style.backgroundColor = bgChange();
+  }
+}
+```
+8. onsubmit事件处理器：表单被提交时触发；preventDefault()函数，停止表单提交
+9. 事件触发顺序：冒泡及捕获（默认情况下，所有事件处理程序都在冒泡阶段进行注册）：
+！[事件冒泡及捕获](https://mdn.mozillademos.org/files/14075/bubbling-capturing.png)
+10. 在标准事件对象上调用stopPropagation()函数, 让当前事件处理程序可以运行但不会在冒泡链上扩散
+11. 事件委托:在父节点上设置事件监听器通过冒泡影响每个子节点,代替在每个子节点上设置监听器
