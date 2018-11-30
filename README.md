@@ -275,7 +275,7 @@ source可以引用size属性，但应该仅仅当在艺术方向场景下使用m
 2. 单行文本域只有一个真正的约束：如果输入带有换行符的文本，浏览器会在发送数据之前删除换行符。
 3. 通过type属性增强单行文本域：email地址域，password域，search域，tel域，url域
 4. \<textarea>元素属性：cols，文本控件的可见宽度，平均字符宽度；rows，控制的可见文本行数；wrap，表示控件是如何包装文本，hard或soft
-##### 下拉内容
+##### 下拉内容 select
 1. 可以使用selected属性在所需的\<option>元素上设置选择框的默认值
 2. \<option>元素也可以嵌套在\<optgroup label="groups">元素中
 3. \<option>元素设置了value属性，提交表单时该属性值会被发送。如忽略value属性，则使用<option>元素的内容
@@ -287,9 +287,11 @@ source可以引用size属性，但应该仅仅当在艺术方向场景下使用m
 </datalist>
 ```
 ##### 可选中项
-1. 表单提交后所有具有name属性的小部件都会被发送，即使没有任何输入值
-2. 使用\<fieldset>\<legend><ul><li>等元素组织可选项\<label>\<input>
-3. 多个单选按钮的name属性共享相同的值，它们将被认为属于同一组按钮，同一组中只有一个按钮可以同时被选
+1. 使用type属性值为checkbox的 \<input>元素来创建一个复选框
+2. 表单提交后所有具有name属性的小部件都会被发送，即使没有任何输入值
+3. 使用<code>\<fieldset>\<legend>\<ul>\<li></code>等元素组织可选项\<label>\<input>
+4. 使用type属性值为radio的 <input>元素来创建一个单选按钮
+5. 多个单选按钮的name属性共享相同的值，它们将被认为属于同一组按钮，同一组中只有一个按钮可以同时被选
 ##### 按钮
 1. 从技术上讲，使用\<button>元素或\<input>元素定义的按钮几乎没有区别，但<button>元素中标签可以是HTML，可进行样式化
 ##### 高级表单部件
@@ -813,3 +815,14 @@ for (var i = 0; i < divs.length; i++) {
 11. 事件委托:在父节点上设置事件监听器通过冒泡影响每个子节点,代替在每个子节点上设置监听器
 #### 评估
 1. JavaScript貌似不提供格式化字符串方法,大部分场景通过字符串与变量实现,也可以自定义格式化函数(传入参数替换占位符)
+### JavaScript对象介绍
+#### JavaScript对象基础
+1. 对象语法(每一个名字/值对被逗号分隔开，并且名字和值之间由冒号分隔):
+```html
+var objectName = {
+  member1Name : member1Value,
+  member2Name : member2Value,
+  member3Name : member3Value
+}
+```
+#### 适合初学者的面向对象JavaScript
