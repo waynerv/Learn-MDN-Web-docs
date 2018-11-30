@@ -811,3 +811,5 @@ for (var i = 0; i < divs.length; i++) {
 ！[事件冒泡及捕获](https://mdn.mozillademos.org/files/14075/bubbling-capturing.png)
 10. 在标准事件对象上调用stopPropagation()函数, 让当前事件处理程序可以运行但不会在冒泡链上扩散
 11. 事件委托:在父节点上设置事件监听器通过冒泡影响每个子节点,代替在每个子节点上设置监听器
+#### 评估
+1. JavaScript貌似不提供格式化字符串方法,大部分场景通过字符串与变量实现,也可以自定义格式化函数(传入参数替换占位符)
