@@ -825,4 +825,198 @@ var objectName = {
   member3Name : member3Value
 }
 ```
+2. 传输一些有结构和关联的资料时常见的方式是使用字面量来创建一个对象
+3. 使用与Python类似的方式来访问对象的属性和方法,可以在对象内部嵌套另一个对象
+4. 除了.表示法还可以使用括号表示法:<code>person.name.first</code>等价于<code>person['name']['first']</code>
+5. 可以直接用以上方法访问,修改甚至创建对象成员\
+6. 点表示法只能接受字面量成员的名字(实质为字符串).括号表示法可以接受变量作为名字
+7. "this"含义类似Python中的"self",指代当前实例对象(代码运行时所在的对象)
+8. 每个页面在加载完毕后，会有一个Document的实例被创建，叫做document，它代表了整个页面的结构，内容和一些功能，比如页面的URL
+9. 内建的对象或API不会总是自动地创建对象的实例,有些需要使用构造器进行实例化
 #### 适合初学者的面向对象JavaScript
+1. 最基本的OOP思想就是我们想要在程序中使用对象来表示现实世界模型, 并提供一个简单的方式来访问它的信息和功能
+2. 多态——用来描述多个对象拥有实现共同方法的能力
+3. javaScript没有创建Class类的声明,使用构建函数来定义对象和他们的特征,与Python实例化有所区别
+4. 构建函数就是JavaScript版本的类定义(首字母大写以便区别):
+```html
+function Person(name) {
+  this.name = name;
+  this.greeting = function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  };
+}
+```
+5. 构造对象实例方法(关键字 new +含参函数):
+```html
+var person1 = new Person('Bob', 'Smith', ...);
+```
+6. 其他创建对象实例的方式1-使用Object构造该函数(可以将对象文本传递给函数作为参数):
+```html
+var person1 = new Object({
+  name : 'Chris',
+  age : 38,
+  greeting : function() {
+  alert('Hi! I\'m' + this.name + '.');
+  }
+});
+```
+7. 其他创建对象实例的方式2-使用create()方法,基于现有对象创建新的对象实例:
+```html
+var person2 = Object.create(person1);
+```
+person2基于person1创建， 具有相同的属性和方法    
+#### 对象原型
+1. JavaScript通过原型机制，从其他对象继承功能特性；这种继承机制与经典的面向对象编程语言的继承机制不同
+2. 每个函数都有一个原型(prototype)属性,该原型属性是一个对象
+3. 默认情况下, 所有函数的原型属性的 __proto__ 就是 window.Object.prototype
+4. 示例:
+```html
+function doSomething(){}
+doSomething.prototype.foo = "bar";
+console.log( doSomething.prototype );
+[output]:
+{
+    foo: "bar",
+    constructor: ƒ doSomething(),
+    __proto__: {
+        constructor: ƒ Object(),
+        hasOwnProperty: ƒ hasOwnProperty(),
+        isPrototypeOf: ƒ isPrototypeOf(),
+        propertyIsEnumerable: ƒ propertyIsEnumerable(),
+        toLocaleString: ƒ toLocaleString(),
+        toString: ƒ toString(),
+        valueOf: ƒ valueOf()
+    }
+}
+```
+##### 原型链
+5. 原型链中的方法和属性没有被复制到其他对象——它们被访问需要通过“原型链”的方式
+6. 使用对象的<code>__proto__</code>属性可以访问其原型对象
+##### 在prototype属性中定义继承成员
+7. 继承的属性和方法是定义在对象的prototype 属性之上,其他的对象属性不会被继承
+8. prototype 属性包含（指向）一个对象，你在这个对象中定义需要被继承的成员
+9. Object.create() 实际做的是将原对象作为原型对象创建一个新的对象:,<code>person2.__proto__</code>返回对象person1
+##### constructor属性
+10. 通过使用对象的constructor属性可以引用原始构造器创建一个和原对象一类的对象:<code>var person3 = new person1.constructor('Karen'...);
+11. 获得某个对象实例的构造器的名字:<code>person1.constructor.name</code>
+##### 修改原型
+12. 向构造器的prototype属性添加新的方法,旧有对象实例的可用功能会被自动更新
+13. 一般来说, 在构造器内定义常属性比在prototype上定义更好
+14. 常见定义模式:在构造器（函数体）中定义属性、在 prototype 属性上定义方法,示例:
+```html
+function Test(a,b,c,d) {
+  // 属性定义
+};
+// 定义方法
+Test.prototype.x = function () { ... }
+Test.prototype.y = function () { ... }
+```
+#### JavaScript 中的继承
+1. JavaScript继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为原型式继承 —— prototypal inheritance）。
+##### 继承操作步骤
+2. 在父类构造器中声明继承的属性,在构造器原型上定义需继承的方法
+3. 定义子类的构造器函数(调用父类构造器函数,定义新属性):
+```html
+function Teacher(first, last, age, gender, interests, subject) {
+  Person.call(this, first, last, age, gender, interests);
+
+  this.subject = subject;
+}
+```
+4. 设置子类的原型和构造器引用:
+```html
+Teacher.prototype = Object.create(Person.prototype);
+
+Teacher.prototype.constructor = Teacher;
+```
+5. 添加或覆盖新的方法:
+```html
+Teacher.prototype.greeting = function() {
+
+  alert('Hello. My name is ' + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
+};
+```
+##### 总结
+6. 如果继承的构造函数不从传入的参数中获取其属性值，则不需要在call()中为其指定其他参数
+7. 每一个函数对象都有并且只有函数对象有prototype属性，prototype本身就是定义在Function对象下的属性
+8. 任何要被继承的方法都应该定义在构造函数的prototype对象里，并且永远使用父类的prototype来创造子类的prototype，这样才不会打乱类继承结构
+9. 对象成员总结:3种属性或方法
+    - 定义在构造器函数中,用于给予对象实例的.以this.x = x形式定义,通常通过使用new关键字调用构造函数来创建
+    - 直接在构造函数上定义、仅在构造函数上可用的,如Object.keys()
+    - 在构造函数原型上定义、由所有实例和对象类继承
+##### 何时使用继承
+1. 当需要一系列拥有相似特性的对象，创建一个包含共有功能的通用对象，然后在特殊的对象类型中继承这些特性
+2. 不要临时或永久修改浏览器内置对象的原型
+#### 使用JSON
+1. JavaScript对象表示法（JSON）: 将结构化数据表示为JavaScript对象的标准格式
+2. 如何访问JSON中的内容:使用.或括号表示法访问对象内的数据;访问对象中对象:通过属性名和数组索引链式访问
+3. 数组对象也是一种合法的JSON对象
+4. 不同于JS的对象,JSON只有字符串可以用作属性名称,但值仍旧可以为字符串，数字，数组，布尔及其它的字面值对象
+##### 示例:如何载入JSON数据
+1. 通过<code>XMLHTTPRequest</code>API创建HTTP请求,首先创建一个HTTP请求对象:
+```html
+var request = new XMLHttpRequest();
+```
+2. 使用<code>open()</code>函数打开一个新的请求(参数:请求方法和地址):
+```html
+request.open('GET', requestURL);
+```
+3. 设定返回对象类型病发送请求:
+```html
+request.responseType = 'json';
+request.send();
+```
+4. 通过事件处理器(请求成功时触发)保存JSON数据:
+```html
+request.onload = function() {
+  var superHeroes = request.response;  
+  populateHeader(superHeroes);
+  showHeroes(superHeroes);
+}
+```
+5. 通过访问JSON对象中的数据进行其他处理
+##### 对象和文本间的转换
+1. parse(): 以文本字符串形式接受JSON对象作为参数，并返回相应的对象
+```html
+request.responseType = 'text';
+......
+var superHeroes = JSON.parse(superHeroesText);
+```
+2. stringify(): 接收一个对象作为参数，返回一个对应的JSON字符串
+```html
+var myJSON = { "name" : "Chris", "age" : "38" };
+var myString = JSON.stringify(myJSON);
+```
+#### 实践对象构造
+1. 绘制canvas画布,设定宽度和高度;创建随机位置和随机颜色函数
+2. 创建小球构造器,定义生成坐标、速度、颜色、半径等属性
+3. 通过ctx对象方法创建绘制小球方法
+4. 创建更新小球位置方法：检测是否到达边框，反转小球的速度方向来让它向反方向移动，每次调用移动速度值距离
+5. 创建动画：创建小球对象的数组，创建循环函数（循环生成指定数量小球，遍历绘制与更新），使用requestAnimationFrame() 递归运行循环函数
+6. 添加碰撞检测：遍历所有小球，对判断非当前的小球计算距离检测是否碰撞，如碰撞则更改两个小球颜色
+### 客户端Web API
+#### Web API简介
+1. API分类：浏览器内置API；第三方API
+##### 回调函数
+1. 由另一个函数作为参数的函数称为 (callback function "回调函数").
+2. 需要异步操作（需使用第一步操作返回结果，容易出错）：
+```html
+var position = navigator.geolocation.getCurrentPosition();
+var myLatitude = position.coords.latitude;
+```
+3. 设计成回调函数：
+```html
+navigator.geolocation.getCurrentPosition(function(position) { ... });
+```
+##### API工作方式
+1. 通常基于对象进行交互，将使用的数据和提供的功能封装在对象属性和方法中
+2. API对象通常包含构造函数来创建用于编写程序的对象实例;其次API对象通常接受可调整的options对象作为参数，以适应程序所需的确切环境
+3. 有可识别的入口点，如文档对象模型的入口（其他个别API涉及要创建特定的上下文）：
+```html
+var em = document.createElement('em');  <!-- 创建一个新的元素 -->
+var para = document.querySelector('p'); <!-- 引用一个已经存在的元素 -->
+em.textContent = 'Hello there!';  <!--给em元素增加文本 -->
+para.appendChild(em);  <!--embed em inside para -->
+```
+4. 使用事件来处理状态的变化，如：XMLHttpRequest对象的实例（每一个实例都代表一个到服务器的HTTP请求,来取得某种新的资源）有很多事件可用，例如onload事件在成功返回时触发
+5. 在适当的地方有额外的安全机制，如只在HTTPS页面工作或需用户许可权限
