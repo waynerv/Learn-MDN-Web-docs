@@ -1020,3 +1020,133 @@ para.appendChild(em);  <!--embed em inside para -->
 ```
 4. 使用事件来处理状态的变化，如：XMLHttpRequest对象的实例（每一个实例都代表一个到服务器的HTTP请求,来取得某种新的资源）有很多事件可用，例如onload事件在成功返回时触发
 5. 在适当的地方有额外的安全机制，如只在HTTPS页面工作或需用户许可权限
+#### 操作文档对象模型
+1. 3种Web API访问的主要部位：
+    - Window对象，当前窗口，可以返回窗口大小，操作载入窗口的文档，为当前窗口绑定事件处理器等
+    - Navigator对象，浏览器存在于web上的状态和标识（即用户代理），可以获取用户地理信息、偏爱语言、多媒体流等
+    - Document对象，载入窗口的实际页面，可以返回和操作文档中HTML和CSS上的信息
+##### 获取操作对象
+2. 选择一个元素，并将它的引用存储在变量中
+```html
+var link = document.querySelector('a');
+```
+3. querySelector()调用匹配在文档中查找到的第一个匹配元素，Document.querySelectorAll()方法选中文档中所有匹配选择器的元素，并将其引用存储在一个数组中
+4. 其他获取元素应用方法：Document.getElementById()，选择一个id属性值已知的元素
+##### 创建并放置新的节点
+5. 创建新元素：使用Document.createElement()，如<code>var para = document.createElement('p');</code>
+6. 为新元素赋予内容（如文本）：<code>para.textContent = 'We hope you enjoyed the ride.';</code>
+7. 放置新元素到父容器中：使用Node.appendChild()方法，如<code>ect.appendChild(para);</code>
+8. 创建新节点：使用Document.createTextNode()创建一个文本节点，参数为文本，放置方法同上
+##### 移动和删除节点
+9. 移动节点：<code>sect.appendChild(linkPara);</code>,linkPara是指向该段落唯一副本的引用,重新放置会移动其位置
+10. 删除节点：无法通过节点方法删除自身，必须通过父节点删除-<code>linkPara.parentNode.removeChild(linkPara);</code>
+##### 操作样式
+11. 方式1：通过HTMLElement.style属性直接修改内联样式，如<code>para.style.backgroundColor = 'black';</code>
+12. 方式2：通过 Element.setAttribute()方法设置class属性，并创建对应类别的样式（更适用于大型项目）
+##### 注意
+13. 使用JavaScript创建静态内容是毫无意义的—最好直接将其写入HTML
+##### 评估-创建购物清单
+1. 创建需要使用元素的引用变量
+2. 创建按钮响应事件函数：
+    - 取出输入值并清空输入框
+    - 创建新条目对应元素并组织关系
+    - 填充新条目内容
+    - 放置新条目
+    - 创建新条目按钮响应事件函数
+3. 使用focus()方法设置聚焦输入框
+#### 从服务器获取数据-AJAX
+##### XMLHttpRequest请求步骤
+1. 构造请求目标URL
+2. 使用XMLHttpRequest()构造函数创建一个新的请求对象
+```html
+var request = new XMLHttpRequest();
+```
+3. 使用open()方法指定请求资源的HTTP request method , 以及目标URL
+```html
+request.open('GET', url);
+```
+4. 设置期待的响应类型—由请求的responseType属性定义，XHR默认返回txt文本类型
+```html
+request.responseType = 'text';
+```
+5. 使用请求的onload 事件处理器来处理返回的数据（response)
+```html
+request.onload = function() {
+  poemDisplay.textContent = request.response;
+};
+```
+6. 发送请求
+```html
+request.send();
+```
+##### Fetch和Promises
+```html
+fetch(url).then(function(response) {
+  response.text().then(function(text) {
+    poemDisplay.textContent = text;
+  });
+});
+```
+1. 执行异步操作：传递给then()是一段不会立即执行的代码，当完成指定的操作时代码会被运行（代替xhr的响应事件）
+2.  promise 解析时会自动将响应结果作为参数传递给then()内的函数
+3. 执行响应的text()方法将响应作为原始文本返回
+4. 另一种写法;
+```html
+fetch(url).then(function(response) {
+  return response.text()
+}).then(function(text) {
+  poemDisplay.textContent = text;
+});
+```
+##### 评估
+1. 返回请求状态的范式(fectch使用reponse.ok和response.status)
+```html
+request.onload = function() {
+  if(request.status === 200) {
+  products = request.response;
+  } else {
+      console.log('Network request failed with response ' + request.status + ': ' + request.statusText);
+  }
+}
+```
+#### 第三方API
+1. 需要通过 <script> 元素的src属性连接到第三方服务器所开放的JavaScript库
+2. 为了保证安全性，通常需要先申请密钥才能使用API
+3. 通常使用第三方API的步骤：
+    - 查阅有关文档
+    - 获取开发者密钥
+    - 连接API到你的应用
+    - 通过API请求数据
+    - 显示返回的数据
+#### 画图
+1. <code>canvas</code>和<code>WebGLS</code>不深入学习，有需要时查阅
+2. 画布左上角的坐标是(0, 0)，横坐标（x）轴向右延伸，纵坐标（y）轴向下延伸
+##### 简单使用\<canvas>
+1. 在HTML插入<canvas> 元素，插入反馈信息
+2. 创建画布并确定尺寸
+```html
+var canvas = document.querySelector('.myCanvas');
+var width = canvas.width = window.innerWidth;
+var height = canvas.height = window.innerHeight;
+```
+3. 获取画布上下文并完成设置
+```html
+var ctx = canvas.getContext('2d');
+```
+4. 填充矩形
+```html
+ctx.fillStyle = 'rgb(0, 0, 0)';
+ctx.fillRect(0, 0, width, height);
+```
+5. 描边线条
+```html
+ctx.strokeStyle = 'rgb(255, 255, 255)';
+ctx.strokeRect(25, 25, 175, 200);
+ctx.lineWidth = 5;
+```
+#### 视频和音频APIs
+不深入学习，有需要时查阅
+#### 客户端存储
+1. Web Storage API 提供了一种非常简单的语法，用于存储和检索较小的、由名称和相应值组成的数据项。当您只需要存储一些简单的数据时，比如用户的名字，用户是否登录，屏幕背景使用了什么颜色等等，这是非常有用的。
+2. IndexedDB API 为浏览器提供了一个完整的数据库系统来存储复杂的数据。这可以用于存储从完整的用户记录到甚至是复杂的数据类型，如音频或视频文件。
+3. 不深入学习，有需要时查阅
