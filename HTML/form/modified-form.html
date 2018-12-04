@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <!-- This is our main container for our widget.
+     The tabindex attribute is what allows the user to focus the widget.
+     We'll see later that it's better to set it through JavaScript. -->
+  <div class="select" tabindex="0">
+
+  <!-- This container will be used to display the current value of the widget -->
+  <span class="value">Cherry</span>
+
+  <!-- This container will contain all the option available for our widget.
+       Because it's a list, it makes sense to use the ul element. -->
+  <ul class="optList">
+    <!-- Each option only contain the value to be displayed, we'll see later
+         how to handle the real value that will be send with the form data -->
+    <li class="option">Cherry</li>
+    <li class="option">Lemon</li>
+    <li class="option">Banana</li>
+    <li class="option">Strawberry</li>
+    <li class="option">Apple</li>
+  </ul>
+
+  </div>
+</body>
+</html>
