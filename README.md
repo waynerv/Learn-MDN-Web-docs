@@ -230,7 +230,7 @@ function multiply(num1, num2) {
   <source media="(min-width: 800px)" srcset="elva-800w.jpg">
   <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
 </picture>
-``` 
+```
 source可以引用size属性，但应该仅仅当在艺术方向场景下使用media属性；当你使用media时，不要在sizes属性中也提供媒体条件
 6. 浏览器加载页面时，预加载图片在加载和解析页面的CSS和JavaScript之前，因此不能依赖两者来动态调整图片，因为会有重复加载
 7. 使用现代图像格式如WebP和JPEG-2000，在type属性中提供MIME类型以跨浏览器兼容：
@@ -306,9 +306,9 @@ source可以引用size属性，但应该仅仅当在艺术方向场景下使用m
 4. 进度条：<code>\<progress max="100" value="75">75/100</progress></code>
 5. 仪表条：<code>\<meter min="0" max="100" value="75" low="33" high="66" optimum="50">75</meter></code>(密码强弱提示？)
 #### 发送表单数据
-1. 如果<form>元素没有提供action属性，数据将被发送到当前包含表单页面的URL
+1. 如果\<form>元素没有提供action属性，数据将被发送到当前包含表单页面的URL
 2. GET方法发送的请求主体为空，因此表单数据只能追加到URL中（很不安全）
-3. 将<form>元素的enctype属性值设置为multipart/form-data以上传二进制文件
+3. 将\<form>元素的enctype属性值设置为multipart/form-data以上传二进制文件
 4. XSS攻击利用用户对web站点的信任，而CSRF攻击则利用网站为其用户提供的信任
 5. 最重要的安全原则是:永远不要相信你的用户，包括你自己；所有到达服务器的数据都必须经过检查和消毒
 #### 表单数据校验
